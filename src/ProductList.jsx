@@ -261,6 +261,10 @@ const handlePlantsClick = (e) => {
      }));
   };
 
+  const itemAlreadyInCart = (nameOftheItem) => {
+    return cartItems.some(item => item.name === nameOftheItem);
+  }
+
   const totalCartItems = () => {
      return cartItems.reduce((totalItems, item) => totalItems + item.quantity, 0);
   }
@@ -297,7 +301,7 @@ const handlePlantsClick = (e) => {
                 <div className="product-title">{plant.name}</div>
                 <div>{plant.description}</div>
                 <div className='product-price'>{plant.cost}</div>
-                <button  className="product-button" onClick={() => handleAddToCart(plant)}>Add to Cart</button>
+                <button style={{backgroundColor: itemAlreadyInCart(plant.name) ? "grey" : "rgb(76, 175, 80)"}} className="product-button" onClick={() => handleAddToCart(plant)} disabled = {itemAlreadyInCart(plant.name) ? true : false}>Add to Cart</button>
             </div>
             ))}
         </div>
